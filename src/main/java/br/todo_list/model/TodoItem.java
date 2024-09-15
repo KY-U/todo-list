@@ -1,11 +1,6 @@
 package br.todo_list.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Column;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Data
@@ -26,5 +21,6 @@ public class TodoItem {
     private boolean completed;
 
     @ManyToOne
+    @JoinColumn(name = "todo_list_id", nullable = false)
     private TodoList todoList;
 }
