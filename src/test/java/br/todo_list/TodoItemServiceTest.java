@@ -15,7 +15,7 @@ import static org.mockito.Mockito.*;
 
 
 @SpringBootTest
-class TodoListApplicationTests {
+class TodoItemServiceTest {
 	@Mock
 	private TodoItemRepository todoItemRepository;
 
