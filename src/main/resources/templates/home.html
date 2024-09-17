@@ -1,13 +1,19 @@
-<!-- src/main/resources/templates/index.html -->
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity"
+      layout:decorate="~{fragments/layout}">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="/css/styles.css" rel="stylesheet">
-    <title>Test Tailwind CSS</title>
+    <link href="/css/login.css" rel="stylesheet">
+    <title>Home Page</title>
 </head>
-<body class="bg-blue-500 text-white">
-<h1 class="text-4xl font-bold">Hello, Tailwind!</h1>
+<body>
+<div layout:fragment="content" class="home-container">
+    <h1>Hello, <span th:text="${user.username}">username</span>!</h1>
+    <p>Welcome to your dashboard. Feel free to explore the application.</p>
+</div>
 </body>
 </html>
