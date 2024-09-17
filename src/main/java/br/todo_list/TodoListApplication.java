@@ -26,7 +26,7 @@ public class TodoListApplication {
 	public CommandLineRunner demo(UserRepository userRepository, TodoListRepository todoListRepository, TodoItemRepository todoItemRepository, PasswordEncoder passwordEncoder) {
 		return (args) -> {
 			// Populando dados de usuários
-			if (userRepository.findByEmail("user1@example.com").isEmpty()) {
+			if (userRepository.findByEmail("user1@example.com") == null) {
 				User user1 = new User();
 				user1.setUsername("user1");
 				user1.setPassword(passwordEncoder.encode("password1"));
@@ -46,7 +46,7 @@ public class TodoListApplication {
 
 			// Verifica se as listas de tarefas já existem
 			if (todoListRepository.findByTitle("Groceries").isEmpty()) {
-				User user1 = userRepository.findByEmail("user1@example.com").orElseThrow();
+				User user1 = userRepository.findByEmail("user1@example.com");
 
 				TodoList todoList1 = new TodoList();
 				todoList1.setTitle("Groceries");
@@ -78,10 +78,10 @@ public class TodoListApplication {
 				todoItemRepository.save(todoItem2);
 			}
 
-			Optional<User> user = userRepository.findByEmail("user1@example.com");
+			User user = userRepository.findByEmail("user1@example.com");
 			System.out.println("o usuário é:");
-			System.out.println(user.get().getEmail());
-			System.out.println(user.get().getPassword());
+			System.out.println(user.getEmail());
+			System.out.println(user.getPassword());
 		};
 	}
 }
