@@ -1,0 +1,61 @@
+package br.todo_list.security;
+
+import br.todo_list.repository.UserRepository;
+import br.todo_list.service.CustomUserDetailsService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+
+@Configuration
+@EnableWebSecurity
+public class SecurityConfig {
+
+    @Autowired
+    private UserRepository userRepository;  // Injeção do repositório
+
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http
+                .csrf().disable()
+                .authorizeHttpRequests((authz) -> authz
+                        .requestMatchers("/public/**").permitAll() // URLs públicas permitidas
+                        .requestMatchers("/").permitAll()
+                        .anyRequest().authenticated() // Exigir autenticação para qualquer outra requisição
+                )
+                .formLogin((form) -> form
+                        .loginPage("/login") // Página de login personalizada
+                        .usernameParameter("email") // Se estiver usando um campo "email" para login
+                        .passwordParameter("password")
+                        .successHandler(customAuthenticationSuccessHandler()) // Handler personalizado
+                        .failureUrl("/login?error=true")
+                        .permitAll()
+                )
+                .logout((logout) -> logout
+                        .permitAll()
+                );
+
+        return http.build();
+    }
+
+    @Bean
+    public UserDetailsService userDetailsService() {
+        return new CustomUserDetailsService(userRepository);
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return NoOpPasswordEncoder.getInstance(); // Usando senhas em texto simples para testes
+    }
+
+    @Bean
+    public AuthenticationSuccessHandler customAuthenticationSuccessHandler() {
+        return new CustomAuthenticationSuccessHandler(); // Seu handler personalizado
+    }
+}
