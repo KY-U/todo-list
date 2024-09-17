@@ -31,3 +31,23 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# Node modules directory
+/node_modules/
+
+/build/
+
+# Tailwind CSS output
+/src/main/resources/static/css/styles.css
+
+# Log files
+*.log
+
+# Environment files
+.env
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+
