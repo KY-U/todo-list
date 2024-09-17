@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/todo_items")
+@RequestMapping("/items")
 public class TodoItemController {
 
     @Autowired
@@ -28,7 +28,7 @@ public class TodoItemController {
     }
 
     //get todo items by to do list
-    @GetMapping("/todo_list/{todoListId}")
+    @GetMapping("/lists/{todoListId}")
     public List<TodoItem> getTodoItemsByTodoListId(@PathVariable Long todoListId) {
         return todoItemService.getTodoItemsByTodoListId(todoListId);
     }

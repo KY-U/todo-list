@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/todo_lists")
+@RequestMapping("/lists")
 public class TodoListController {
 
     @Autowired
@@ -28,7 +28,7 @@ public class TodoListController {
     }
 
     //get todo lists by user id
-    @GetMapping("/user/{userId}")
+    @GetMapping("/users/{userId}")
     public List<TodoList> getTodoListsByUserId(@PathVariable Long userId) {
         return todoListService.getTodoListsByUserId(userId);
     }
