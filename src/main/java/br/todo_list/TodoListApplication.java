@@ -23,22 +23,24 @@ public class TodoListApplication {
 
 	//PasswordEncoder passwordEncoder
 	@Bean
-	public CommandLineRunner demo(UserRepository userRepository, TodoListRepository todoListRepository, TodoItemRepository todoItemRepository) {
+	public CommandLineRunner demo(UserRepository userRepository, TodoListRepository todoListRepository, TodoItemRepository todoItemRepository, PasswordEncoder passwordEncoder) {
 		return (args) -> {
 			// Populando dados de usuários
 			if (userRepository.findByEmail("user1@example.com").isEmpty()) {
 				User user1 = new User();
 				user1.setUsername("user1");
-				//user1.setPassword(passwordEncoder.encode("password1"));
-				user1.setPassword("password1");
+				user1.setPassword(passwordEncoder.encode("password1"));
+				//user1.setPassword("password1");
 				user1.setEmail("user1@example.com");
+				user1.setRole("USER");
 				userRepository.save(user1);
 
 				User user2 = new User();
 				user2.setUsername("user2");
-				//user2.setPassword(passwordEncoder.encode("password2"));
-				user1.setPassword("password2");
+				user2.setPassword(passwordEncoder.encode("password2"));
+				//user1.setPassword("password2");
 				user2.setEmail("user2@example.com");
+				user2.setRole("USER");
 				userRepository.save(user2);
 			}
 

@@ -30,4 +30,8 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private List<TodoList> todoLists;
+
+    @NotEmpty
+    @Column(nullable = false, length = 50)
+    private String role;
 }
