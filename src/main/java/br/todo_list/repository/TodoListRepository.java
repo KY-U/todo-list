@@ -6,4 +6,6 @@ import br.todo_list.model.TodoList;
 import java.util.List;
 public interface TodoListRepository extends JpaRepository<TodoList, Long> {
     List<TodoList> findByUserId(Long userId);
+
+    List<TodoList> findByTitle(String title);
 }
