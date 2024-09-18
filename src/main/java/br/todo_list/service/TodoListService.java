@@ -1,5 +1,6 @@
 package br.todo_list.service;
 
+import br.todo_list.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import br.todo_list.model.TodoList;
@@ -28,5 +29,16 @@ public class TodoListService {
 
     public void deleteTodoList(Long id) {
         todoListRepository.deleteById(id);
+    }
+
+    public String getListOwnerName(Long id) {
+        Optional<TodoList> list = todoListRepository.findById(id);
+        User owner = list.get().getUser();
+        return owner.getUsername();
+    }
+
+    public String getListTitle(Long id){
+        Optional<TodoList> list = todoListRepository.findById(id);
+        return list.get().getTitle();
     }
 }

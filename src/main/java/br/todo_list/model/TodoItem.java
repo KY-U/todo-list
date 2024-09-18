@@ -20,7 +20,18 @@ public class TodoItem {
     @Column(nullable = false)
     private boolean completed;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "todo_list_id", nullable = false)
     private TodoList todoList;
+
+    @Override
+    public String toString() {
+        return "TodoItem{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", completed=" + completed +
+                //", todoList=" + todoList +
+                '}';
+    }
 }

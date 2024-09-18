@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Dashboard</title>
+    <link href="/css/verde.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <h1><span th:text="${title}">Dashboard</span></h1>
+    <ul>
+        <li th:each="todoItem : ${itemList}" th:if="${!todoItem.completed}">
+            <div class="todo-item">
+                <h2 th:text="${todoItem.title}" class="todo-title">Item Title</h2>
+                <p th:text="${todoItem.description}" class="todo-description">Item Description</p>
+                <!-- Botão para marcar como feito -->
+                <form th:action="@{/items/{id}/complete(id=${todoItem.id})}" method="post">
+                    <button type="submit">Mark as Done</button>
+                </form>
+            </div>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

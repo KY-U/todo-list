@@ -25,4 +25,15 @@ public class TodoList {
 
     @OneToMany(mappedBy = "todoList")
     private List<TodoItem> todoItems;
+
+    @Override
+    public String toString() {
+        return "TodoList{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                //", user=" + user +
+                ", todoItems=" + todoItems +
+                '}';
+    }
 }

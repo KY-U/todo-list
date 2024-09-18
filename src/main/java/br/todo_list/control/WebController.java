@@ -57,12 +57,22 @@ public class WebController {
         return "register";
     }
 
-    @GetMapping("/list_dashboard")
-    public String listDashboard(@RequestParam("id") Long listId, Model model){
-        List<TodoItem> itemsList = todoItemService.getTodoItemsByTodoListId(listId);
-        model.addAttribute("items", itemsList);
+    @GetMapping("/list_dashboard/{id}")
+    public String listDashboard(@PathVariable("id") Long listId, Model model){
+        //System.out.println("Received listId: " + listId);
+        List<TodoItem> itemList = todoItemService.getTodoItemsByTodoListId(listId);
+        String listTitle = todoListService.getListTitle(listId);
 
-        return "list-dashboard";
+        if(itemList == null){
+            System.out.println("nao achou nenhum item");
+        }
+        else{
+            System.out.println("Received itemList: " + itemList);
+        }
+        model.addAttribute("itemList", itemList);
+        model.addAttribute("title", listTitle);
+
+        return "list_dashboard";
     }
 
 }

@@ -12,6 +12,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.util.List;
 import java.util.Optional;
 
 @SpringBootApplication
@@ -21,7 +22,6 @@ public class TodoListApplication {
 		SpringApplication.run(TodoListApplication.class, args);
 	}
 
-	//PasswordEncoder passwordEncoder
 	@Bean
 	public CommandLineRunner demo(UserRepository userRepository, TodoListRepository todoListRepository, TodoItemRepository todoItemRepository, PasswordEncoder passwordEncoder) {
 		return (args) -> {
@@ -29,7 +29,7 @@ public class TodoListApplication {
 			if (userRepository.findByEmail("user1@example.com") == null) {
 				User user1 = new User();
 				user1.setUsername("user1");
-				user1.setPassword(passwordEncoder.encode("password1"));
+				user1.setPassword(passwordEncoder.encode("123"));
 				//user1.setPassword("password1");
 				user1.setEmail("user1@example.com");
 				user1.setRole("USER");
@@ -50,6 +50,7 @@ public class TodoListApplication {
 
 				TodoList todoList1 = new TodoList();
 				todoList1.setTitle("Groceries");
+				todoList1.setDescription("comprinhas pro jantar");
 				todoList1.setUser(user1);
 				todoListRepository.save(todoList1);
 
@@ -62,6 +63,7 @@ public class TodoListApplication {
 			// Verifica se os itens de tarefas já existem
 			if (todoItemRepository.findByTitle("Buy milk").isEmpty()) {
 				TodoList todoList1 = todoListRepository.findByTitle("Groceries").get(0);
+				TodoList todoList2 = todoListRepository.findByTitle("Work Tasks").get(0);
 
 				TodoItem todoItem1 = new TodoItem();
 				todoItem1.setTitle("Buy milk");
@@ -74,15 +76,23 @@ public class TodoListApplication {
 				todoItem2.setTitle("Finish report");
 				todoItem2.setDescription("Complete the annual report");
 				todoItem2.setCompleted(false);
-				todoItem2.setTodoList(todoList1);
+				todoItem2.setTodoList(todoList2);
 				todoItemRepository.save(todoItem2);
+
+				TodoItem todoItem3 = new TodoItem();
+				todoItem3.setTitle("Buy orange");
+				todoItem3.setDescription("5 units");
+				todoItem3.setCompleted(false);
+				todoItem3.setTodoList(todoList1);
+				todoItemRepository.save(todoItem3);
 			}
 
 			User user = userRepository.findByEmail("user1@example.com");
-			System.out.println("o usuário é:");
-			System.out.println(user.getEmail());
-			System.out.println(user.getPassword());
-			System.out.println(user.getId());
+			System.out.println("o usuário é:" + user.getEmail());
+			System.out.println("a senha é:" + user.getPassword());
+			System.out.println("o id é:" + user.getId());
+			//List<TodoItem> itemList = todoItemRepository.findByTodoListId(((Integer) 1).longValue());
+			//System.out.println(itemList);
 		};
 	}
 }

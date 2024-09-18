@@ -28,10 +28,22 @@ public class User {
     @Column(nullable = false, unique = true, length = 100)
     private String email;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
     private List<TodoList> todoLists;
 
     @NotEmpty
     @Column(nullable = false, length = 50)
     private String role;
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                //", todoLists=" + todoLists +
+                ", role='" + role + '\'' +
+                '}';
+    }
 }
