@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/css/verde.css" rel="stylesheet">
+    <title>Create New Todo List</title>
+</head>
+<body>
+
+<div class="create-list-container">
+    <h1>Create New Todo List</h1>
+
+    <form th:action="@{/lists}" method="post">
+        <div class="form-group">
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title" required>
+        </div>
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" rows="4" required></textarea>
+        </div>
+        <button type="submit">Save List</button>
+        <button>
+            <a href="#" th:href="@{/home}" class="back-link">Back to Todo Lists</a>
+        </button>
+
+    </form>
+
+    <!-- Link to go back to the previous page -->
+
+</div>
+
+</body>
+</html>

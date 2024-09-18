@@ -16,6 +16,20 @@ layout:decorate="~{fragments/layout}">
 <body>
 
 <div class="todo-lists-container">
+    <!-- Botão para logout -->
+    <div class="logout-button">
+        <form th:action="@{/logout}" method="post">
+            <button type="submit">Logout</button>
+        </form>
+    </div>
+
+    <!-- Botão para adicionar uma nova lista -->
+    <div class="add-list-button">
+        <form th:action="@{/create_list}" method="get">
+            <button type="submit">Add New List</button>
+        </form>
+    </div>
+
     <h1>Your Todo Lists, <span th:text="${user.username}">username</span>:</h1>
 
     <ul>
@@ -30,6 +44,7 @@ layout:decorate="~{fragments/layout}">
             </form>
         </li>
     </ul>
+
 </div>
 
 </body>

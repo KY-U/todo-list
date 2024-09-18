@@ -1,7 +1,9 @@
 package br.todo_list.control;
 
 import br.todo_list.model.TodoItem;
+import br.todo_list.model.User;
 import br.todo_list.service.TodoItemService;
+import br.todo_list.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import br.todo_list.model.TodoList;
 import br.todo_list.service.TodoListService;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,14 +20,20 @@ import java.util.Optional;
 public class TodoListController {
 
     @Autowired
+    private UserService userService;
+
+    @Autowired
     private TodoListService todoListService;
 
     @Autowired
     private TodoItemService todoItemService;
     //create
     @PostMapping
-    public TodoList createTodoList(@RequestBody TodoList todoList) {
-        return todoListService.createTodoList(todoList);
+    public String createTodoList(@ModelAttribute TodoList todoList, Principal principal) {
+        User user = userService.getUserByEmail(principal.getName());
+        todoList.setUser(user);
+        todoListService.createTodoList(todoList);
+        return "create_list";
     }
 
     //get todo list

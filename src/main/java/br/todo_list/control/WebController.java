@@ -75,4 +75,9 @@ public class WebController {
         return "list_dashboard";
     }
 
+    @GetMapping("/create_list")
+    public String createList(){
+        return "create_list";
+    }
+
 }
