@@ -38,7 +38,7 @@ public class SecurityConfiguration {
         http
                 .csrf((csrf) -> csrf.disable())
                 .authorizeHttpRequests((authz) -> authz
-                .requestMatchers("/", "/register", "/users").permitAll()
+                .requestMatchers("/", "/register", "/users", "/css/*").permitAll()
                 .requestMatchers("/home").hasAuthority("USER")
                 .requestMatchers("/admin").hasAuthority(("ADMIN"))
                 .anyRequest().authenticated()
