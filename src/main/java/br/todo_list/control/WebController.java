@@ -60,6 +60,7 @@ public class WebController {
         //System.out.println("Received listId: " + listId);
         List<TodoItem> itemList = todoItemService.getTodoItemsByTodoListId(listId);
         String listTitle = todoListService.getListTitle(listId);
+        String description = todoListService.getListDescription(listId);
 
         if(itemList == null){
             System.out.println("nao achou nenhum item");
@@ -69,6 +70,7 @@ public class WebController {
         }
         model.addAttribute("itemList", itemList);
         model.addAttribute("title", listTitle);
+        model.addAttribute("description", description);
         model.addAttribute("listId", listId);
 
         return "list_dashboard";

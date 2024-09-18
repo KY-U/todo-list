@@ -18,17 +18,16 @@
         </div>
         <div class="form-group">
             <label for="description">Description:</label>
-            <textarea id="description" name="description" rows="4" required></textarea>
+            <textarea id="description" name="description" rows="4" ></textarea>
         </div>
         <button type="submit">Save List</button>
-        <button>
-            <a href="#" th:href="@{/home}" >Back to Home</a>
-        </button>
+
 
     </form>
 
-    <!-- Link to go back to the previous page -->
-
+    <button>
+        <a href="#" th:href="@{/home}" class="button create-button">Back to Home</a>
+    </button>
 </div>
 
 </body>

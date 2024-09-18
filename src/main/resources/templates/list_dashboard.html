@@ -18,6 +18,7 @@
     </div>
 
     <h1><span th:text="${title}">Dashboard</span></h1>
+    <p><span th:text="${description}"></span></p>
     <ul>
         <li th:each="todoItem : ${itemList}" th:if="${!todoItem.completed}">
             <div class="todo-item">
@@ -28,6 +29,9 @@
                     <input type="hidden" name="listId" th:value="${listId}" />
                     <button type="submit">Mark as Done</button>
                 </form>
+
+                <!-- Botão para editar a list
+                <a th:href="@{/edit_list(id=${todoItem.id})}" class="button edit-button">Edit</a>-->
             </div>
         </li>
     </ul>

@@ -41,4 +41,9 @@ public class TodoListService {
         Optional<TodoList> list = todoListRepository.findById(id);
         return list.get().getTitle();
     }
+
+    public String getListDescription(Long id){
+        Optional<TodoList> list = todoListRepository.findById(id);
+        return list.get().getDescription();
+    }
 }
