@@ -1,6 +1,7 @@
 package br.todo_list.control;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import br.todo_list.model.User;
 import br.todo_list.service.UserService;
@@ -8,7 +9,7 @@ import br.todo_list.service.UserService;
 import java.util.List;
 import java.util.Optional;
 
-@RestController
+@Controller
 @RequestMapping("/users")
 public class UserController {
 
@@ -17,8 +18,9 @@ public class UserController {
 
     //create
     @PostMapping
-    public User createUser(@RequestBody User user) {
-        return userService.createUser(user);
+    public String createUser(@ModelAttribute User user) {
+        userService.createUser(user);
+        return "redirect:/login";
     }
 
     //get user
