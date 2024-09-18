@@ -205,3 +205,52 @@ button:hover {
 .logout-button button:hover {
     background-color: #c82333; /* Cor vermelha escura para hover */
 }
+
+/*aaaaaaaaaaaaa/
+/* Container for the navigation buttons */
+.navigation-buttons {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Estilo para os botões de navegação */
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    text-align: center;
+    border-radius: 4px;
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* Estilo específico para o botão "Create Todo Item" */
+.create-button {
+    background-color: #28a745; /* Verde */
+}
+
+.create-button:hover {
+    background-color: #218838; /* Verde mais escuro */
+}
+
+/* Estilo para os itens da lista */
+.todo-item {
+    background-color: #fff;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.todo-title {
+    margin: 0;
+    font-size: 18px;
+}
+
+.todo-description {
+    margin: 5px 0;
+    color: #666;
+}
+

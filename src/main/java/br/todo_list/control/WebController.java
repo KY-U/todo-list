@@ -10,13 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class WebController {
@@ -71,6 +69,7 @@ public class WebController {
         }
         model.addAttribute("itemList", itemList);
         model.addAttribute("title", listTitle);
+        model.addAttribute("listId", listId);
 
         return "list_dashboard";
     }
@@ -78,6 +77,27 @@ public class WebController {
     @GetMapping("/create_list")
     public String createList(){
         return "create_list";
+    }
+
+    @PostMapping("/items/{id}/complete")
+    public String completeItem(@PathVariable("id") Long itemId, @RequestParam("listId") Long listId){
+        //recuperando o item
+        Optional<TodoItem> item = todoItemService.getTodoItem(itemId);
+
+        //recuperando a lista ao qual pertence
+        TodoList List = item.get().getTodoList();
+
+        item.get().setCompleted(true);
+        //função "save" do repositório cria e edita
+        todoItemService.createTodoItem(item.get());
+
+        return "redirect:/list_dashboard/" + listId;
+    }
+
+    @GetMapping("/create_item")
+    public String createItem(@RequestParam("listId") Long listId, Model model){
+        model.addAttribute("listId", listId);
+        return "create_item";
     }
 
 }

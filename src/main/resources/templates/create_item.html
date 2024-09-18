@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Todo Item</title>
+    <link href="/css/verde.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <h1>Create a New Todo Item</h1>
+
+    <!-- Formulário para criar um novo item -->
+    <form th:action="@{/items}" method="post">
+        <!-- Campo oculto para enviar o listId -->
+        <input type="hidden" name="listId" th:value="${listId}" />
+
+        <!-- Campo para o título do item -->
+        <div class="form-group">
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title" placeholder="Enter the title" required />
+        </div>
+
+        <!-- Campo para a descrição do item -->
+        <div class="form-group">
+            <label for="description">Description (optional):</label>
+            <textarea id="description" name="description" placeholder="Enter the description"></textarea>
+        </div>
+
+        <!-- Botão de envio -->
+        <div class="form-group">
+            <button type="submit">Create Item</button>
+        </div>
+    </form>
+
+    <!-- Botão para voltar -->
+    <div class="back-button">
+        <a href="#" th:href="@{/home}" class="button">Back to Todo Lists</a>
+    </div>
+</div>
+</body>
+</html>

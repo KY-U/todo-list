@@ -1,6 +1,8 @@
 package br.todo_list.control;
 
+import br.todo_list.service.TodoListService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import br.todo_list.model.TodoItem;
 import br.todo_list.service.TodoItemService;
@@ -8,17 +10,32 @@ import br.todo_list.service.TodoItemService;
 import java.util.List;
 import java.util.Optional;
 
-@RestController
+@Controller
 @RequestMapping("/items")
 public class TodoItemController {
 
     @Autowired
     private TodoItemService todoItemService;
 
+    @Autowired
+    private TodoListService todoListService;
     //create
     @PostMapping
-    public TodoItem createTodoItem(@RequestBody TodoItem todoItem) {
-        return todoItemService.createTodoItem(todoItem);
+    public String createTodoItem(
+            @RequestParam("listId") Long listId,
+            @RequestParam("title") String title,
+            @RequestParam(value = "description", required = false) String description) {
+
+        //criando o todoItem
+        TodoItem item = new TodoItem();
+        item.setTitle(title);
+        item.setDescription(description);
+        item.setCompleted(false);
+        item.setTodoList(todoListService.getTodoList(listId).get());
+
+        todoItemService.createTodoItem(item);
+
+        return "redirect:/list_dashboard/" + listId;
     }
 
     //get todo item

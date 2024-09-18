@@ -7,7 +7,16 @@
     <link href="/css/verde.css" rel="stylesheet">
 </head>
 <body>
+
+
 <div class="container">
+    <!-- Botão para voltar para a home -->
+    <div class="navigation-buttons">
+        <a href="#" th:href="@{/home}" class="button create-button">Back to Home</a>
+        <!-- Botão para criar um novo item -->
+        <a th:href="@{/create_item(listId=${listId})}" class="button create-button">Create Todo Item</a>
+    </div>
+
     <h1><span th:text="${title}">Dashboard</span></h1>
     <ul>
         <li th:each="todoItem : ${itemList}" th:if="${!todoItem.completed}">
@@ -16,6 +25,7 @@
                 <p th:text="${todoItem.description}" class="todo-description">Item Description</p>
                 <!-- Botão para marcar como feito -->
                 <form th:action="@{/items/{id}/complete(id=${todoItem.id})}" method="post">
+                    <input type="hidden" name="listId" th:value="${listId}" />
                     <button type="submit">Mark as Done</button>
                 </form>
             </div>
