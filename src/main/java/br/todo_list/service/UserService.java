@@ -18,7 +18,10 @@ public class UserService {
     private PasswordEncoder passwordEncoder;
 
     public User createUser(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        //System.out.println(user.getPassword());
+        //String cryptographedPassword = (passwordEncoder.encode(user.getPassword()));
+        //user.setPassword(cryptographedPassword);
+        //user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
 

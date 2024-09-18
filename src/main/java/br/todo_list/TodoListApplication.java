@@ -82,6 +82,7 @@ public class TodoListApplication {
 			System.out.println("o usuário é:");
 			System.out.println(user.getEmail());
 			System.out.println(user.getPassword());
+			System.out.println(user.getId());
 		};
 	}
 }
