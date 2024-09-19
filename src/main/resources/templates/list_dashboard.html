@@ -19,6 +19,22 @@
 
     <h1><span th:text="${title}">Dashboard</span></h1>
     <p><span th:text="${description}"></span></p>
+
+    <!-- Botão para deletar a lista -->
+    <div class="delete-list-button">
+        <form th:action="@{/lists/{id}/delete(id=${listId})}" method="post">
+            <button type="submit" class="button delete-button" onclick="return confirm('Are you sure you want to delete this list?')">Delete List</button>
+        </form>
+
+        <form th:action="@{/edit_list/{id}(id=${listId})}" method = "get">
+            <button type="submit" class="button delete-button">Edit List</button>
+        </form>
+    </div>
+
+    <div class="delete-list-button">
+        <form th:action="@{/edit_list/{id}(id=${listId})}" class="button edit-button">Edit List</form>
+    </div>
+
     <ul>
         <li th:each="todoItem : ${itemList}" th:if="${!todoItem.completed}">
             <div class="todo-item">

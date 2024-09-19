@@ -102,4 +102,26 @@ public class WebController {
         return "create_item";
     }
 
+    @PostMapping("/lists/{id}/delete")
+    public String deleteList(@PathVariable("id") Long listId){
+        //deleta todos os items da lista
+        List<TodoItem> items = todoItemService.getTodoItemsByTodoListId(listId);
+        for(TodoItem item : items){
+            todoItemService.deleteTodoItem(item.getId());
+        }
+
+        //deleta a lista
+        todoListService.deleteTodoList(listId);
+
+        return "redirect:/home";
+    }
+
+    @GetMapping("/edit_list/{id}")
+    public String editList(@PathVariable("id") Long listId, Model model){
+        Optional<TodoList> list = todoListService.getTodoList(listId);
+        model.addAttribute("list", list);
+
+        return "create_list";
+    }
+
 }
