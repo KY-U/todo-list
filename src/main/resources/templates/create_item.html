@@ -11,7 +11,7 @@
     <h1>Create a New Todo Item</h1>
 
     <!-- Formulário para criar um novo item -->
-    <form th:action="@{/items}" method="post">
+    <form th:action="@{/items/create}" method="post">
         <!-- Campo oculto para enviar o listId -->
         <input type="hidden" name="listId" th:value="${listId}" />
 
@@ -35,7 +35,7 @@
 
     <!-- Botão para voltar -->
     <div class="button">
-        <a href="#" th:href="@{/home}" class="button create-button">Back to Todo Lists</a>
+        <a href="#" th:href="@{/list_dashboard/{id}(id=${listId})}" class="button create-button">Back to List</a>
     </div>
 </div>
 </body>

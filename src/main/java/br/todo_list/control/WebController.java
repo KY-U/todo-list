@@ -63,7 +63,7 @@ public class WebController {
         String description = todoListService.getListDescription(listId);
 
         if(itemList == null){
-            System.out.println("nao achou nenhum item");
+            System.out.println("no item found");
         }
         else{
             System.out.println("Received itemList: " + itemList);

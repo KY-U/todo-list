@@ -3,6 +3,7 @@ package br.todo_list.control;
 import br.todo_list.service.TodoListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import br.todo_list.model.TodoItem;
 import br.todo_list.service.TodoItemService;
@@ -20,11 +21,12 @@ public class TodoItemController {
     @Autowired
     private TodoListService todoListService;
     //create
-    @PostMapping
+    @PostMapping("/create")
     public String createTodoItem(
             @RequestParam("listId") Long listId,
             @RequestParam("title") String title,
-            @RequestParam(value = "description", required = false) String description) {
+            @RequestParam(value = "description", required = false) String description,
+            Model model) {
 
         //criando o todoItem
         TodoItem item = new TodoItem();
@@ -35,7 +37,9 @@ public class TodoItemController {
 
         todoItemService.createTodoItem(item);
 
-        return "redirect:/list_dashboard/" + listId;
+        model.addAttribute("listId", listId);
+
+        return "create_item";
     }
 
     //get todo item
