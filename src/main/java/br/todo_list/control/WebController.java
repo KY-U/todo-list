@@ -119,7 +119,11 @@ public class WebController {
     @GetMapping("/edit_list/{id}")
     public String editList(@PathVariable("id") Long listId, Model model){
         Optional<TodoList> list = todoListService.getTodoList(listId);
-        model.addAttribute("list", list);
+        if (list == null) {
+            return "redirect:/home";
+        }
+
+        model.addAttribute("list", list.get());
 
         return "create_list";
     }

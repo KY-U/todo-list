@@ -4,29 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="/css/verde.css" rel="stylesheet">
-    <title>Create New Todo List</title>
+    <title th:text="${list != null} ? 'Edit Todo List' : 'Create New Todo List'"></title>
 </head>
 <body>
 
 <div class="create-list-container">
-    <h1>Create New Todo List</h1>
+    <h1 th:text="${list != null ? 'Edit ' + list.title : 'Create New Todo List'}"></h1>
 
-    <form th:action="@{/lists}" method="post">
+    <form th:action="${list != null} ? @{/lists/edit} : @{/lists/create}" method="post">
+        <input type="hidden" name="id" th:value="${list != null} ? ${list.id} : null" />
         <div class="form-group">
             <label for="title">Title:</label>
-            <input type="text" id="title" name="title" required>
+            <input type="text" id="title" name="title" th:value="${list != null} ? ${list.title} : ''" required>
         </div>
         <div class="form-group">
             <label for="description">Description:</label>
-            <textarea id="description" name="description" rows="4" ></textarea>
+            <textarea id="description" name="description" rows="4" th:text="${list != null} ? ${list.description} : ''"></textarea>
         </div>
-        <button type="submit">Save List</button>
+        <button type="submit" th:text="${list != null} ? 'Save Changes' : 'Save List'"></button>
 
 
     </form>
 
     <button>
-        <a href="#" th:href="@{/home}" class="button create-button">Back to Home</a>
+        <a th:href="${list != null} ? @{/list_dashboard/{id}(id=${list.id})} : @{/home}" class="button create-button"
+            th:text="${list != null} ? 'Back to List' : 'Back to Home'">
+        </a>
     </button>
 </div>
 

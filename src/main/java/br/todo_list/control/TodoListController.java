@@ -28,12 +28,22 @@ public class TodoListController {
     @Autowired
     private TodoItemService todoItemService;
     //create
-    @PostMapping
+    @PostMapping("/create")
     public String createTodoList(@ModelAttribute TodoList todoList, Principal principal) {
         User user = userService.getUserByEmail(principal.getName());
         todoList.setUser(user);
         todoListService.createTodoList(todoList);
         return "create_list";
+    }
+
+    @PostMapping("/edit")
+    public String editTodoList(@ModelAttribute TodoList todoList, Principal principal) {
+        User user = userService.getUserByEmail(principal.getName());
+        todoList.setUser(user);
+        todoListService.createTodoList(todoList);
+
+        Long listId = todoList.getId();
+        return "redirect:/edit_list/" + listId;
     }
 
     //get todo list
