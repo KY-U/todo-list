@@ -32,6 +32,7 @@ public class TodoItem {
                 ", description='" + description + '\'' +
                 ", completed=" + completed +
                 //", todoList=" + todoList +
+                ", todoListId=" + todoList.getId() + '\'' +
                 '}';
     }
 }

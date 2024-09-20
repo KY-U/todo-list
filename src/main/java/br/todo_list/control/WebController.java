@@ -128,4 +128,13 @@ public class WebController {
         return "create_list";
     }
 
+    @GetMapping("/edit_item")
+    public String editItem(@RequestParam("id") Long itemId, @RequestParam("listId") Long listId, Model model){
+        Optional<TodoItem> item = todoItemService.getTodoItem(itemId);
+
+        model.addAttribute("item", item.get());
+        model.addAttribute("listId", listId);
+
+        return "create_item";
+    }
 }

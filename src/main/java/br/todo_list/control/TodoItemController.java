@@ -42,6 +42,30 @@ public class TodoItemController {
         return "create_item";
     }
 
+    @PostMapping("/edit")
+    public String editTodoItem(
+            @RequestParam("listId") Long listId,
+            @RequestParam("title") String title,
+            @RequestParam(value = "description", required = false) String description,
+            @RequestParam("id") Long itemId,
+            Model model) {
+
+        //todoItem
+        Optional<TodoItem> item = todoItemService.getTodoItem(itemId);
+
+        item.get().setTitle(title);
+        item.get().setDescription(description);
+        item.get().setCompleted(false);
+        item.get().setTodoList(todoListService.getTodoList(listId).get());
+
+        todoItemService.createTodoItem(item.get());
+
+        model.addAttribute("listId", listId);
+        model.addAttribute("id", itemId);
+
+        return "redirect:/edit_item?id=" + itemId + "&listId=" + listId;
+    }
+
     //get todo item
     @GetMapping("/{id}")
     public Optional<TodoItem> getTodoItem(@PathVariable Long id) {
