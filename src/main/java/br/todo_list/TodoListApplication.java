@@ -31,20 +31,37 @@ public class TodoListApplication {
 			todoListRepository.deleteAll();
 			userRepository.deleteAll();
 
+
 			// Populando dados de usuários
 			User user1 = new User();
 			user1.setUsername("user1");
-			user1.setPassword(passwordEncoder.encode("123"));
+
+			String rawPassword = "123";
+			String encryptedPassword = passwordEncoder.encode(rawPassword);
+			System.out.println("Senha antes:" + rawPassword);
+			System.out.println("Senha depois:" + encryptedPassword);
+			user1.setPassword(encryptedPassword);
+			
+			//user1.setPassword(passwordEncoder.encode("123"));
 			user1.setEmail("user1@example.com");
 			user1.setRole("USER");
 			userRepository.save(user1);
 
 			User user2 = new User();
 			user2.setUsername("user2");
-			user2.setPassword(passwordEncoder.encode("password2"));
+			user2.setPassword(passwordEncoder.encode("123"));
+			//user2.setPassword("123");
 			user2.setEmail("user2@example.com");
 			user2.setRole("USER");
 			userRepository.save(user2);
+
+			User user3 = new User();
+			user3.setUsername("user3");
+			user3.setPassword(passwordEncoder.encode("123"));
+			//user3.setPassword("123");
+			user3.setEmail("user3@example.com");
+			user3.setRole("USER");
+			userRepository.save(user3);
 
 			// Populando listas de tarefas para o usuário 1
 			TodoList todoList1 = new TodoList();
@@ -130,13 +147,11 @@ public class TodoListApplication {
 			todoItemRepository.save(todoItem8);
 
 			// Verificação dos dados do usuário
-			/*
-			User user = userRepository.findByEmail("user1@example.com");
-			System.out.println("O usuário é: " + user.getEmail());
-			System.out.println("A senha é: " + user.getPassword());
-			System.out.println("O id é: " + user.getId());
 
-			 */
+			//User user = userRepository.findByEmail("user1@example.com");
+			//System.out.println("O usuário é: " + user.getEmail());
+			//System.out.println("A senha é: " + user.getPassword());
+			//System.out.println("O id é: " + user.getId());
 		};
 	}
 }

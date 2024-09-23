@@ -2,6 +2,7 @@ package br.todo_list.service;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import br.todo_list.model.User;
@@ -15,13 +16,21 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepository;
+
+    //@Autowired
+    //private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     public User createUser(User user) {
-        //System.out.println(user.getPassword());
-        //String cryptographedPassword = (passwordEncoder.encode(user.getPassword()));
-        //user.setPassword(cryptographedPassword);
-        //user.setPassword(passwordEncoder.encode(user.getPassword()));
+        //System.out.println("Senha original: " + user.getPassword());  // Para verificar a senha original
+        //String cryptedPassword = passwordEncoder.encode(user.getPassword());
+        //System.out.println("Senha encriptada: " + cryptedPassword);
+        //user.setPassword(cryptedPassword);
+        //user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
 

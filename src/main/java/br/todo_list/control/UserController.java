@@ -19,6 +19,13 @@ public class UserController {
     //create
     @PostMapping
     public String createUser(@ModelAttribute User user) {
+        //encriptando senha com bpcrypt
+        //String uncryptedpassword = user.getPassword();
+        //String cryptedPassword = passwordEncoder.encode(uncryptedpassword);
+
+        //user.setPassword(cryptedPassword);
+        //System.out.println("Senha recebida: " + user.getPassword());
+        //System.out.println("Método createUser chamado");
         userService.createUser(user);
         return "redirect:/login";
     }
