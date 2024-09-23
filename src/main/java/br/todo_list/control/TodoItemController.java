@@ -66,6 +66,7 @@ public class TodoItemController {
         return "redirect:/edit_item?id=" + itemId + "&listId=" + listId;
     }
 
+    /*
     //get todo item
     @GetMapping("/{id}")
     public Optional<TodoItem> getTodoItem(@PathVariable Long id) {
@@ -89,5 +90,5 @@ public class TodoItemController {
     public TodoItem updateTodoItem(@RequestBody TodoItem todoItem) {
         return todoItemService.createTodoItem(todoItem);
     }
-
+     */
 }

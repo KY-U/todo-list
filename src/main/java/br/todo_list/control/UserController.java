@@ -16,20 +16,14 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    //create
+    //criar usuário
     @PostMapping
     public String createUser(@ModelAttribute User user) {
-        //encriptando senha com bpcrypt
-        //String uncryptedpassword = user.getPassword();
-        //String cryptedPassword = passwordEncoder.encode(uncryptedpassword);
-
-        //user.setPassword(cryptedPassword);
-        //System.out.println("Senha recebida: " + user.getPassword());
-        //System.out.println("Método createUser chamado");
         userService.createUser(user);
         return "redirect:/login";
     }
 
+    /*
     //get user
     @GetMapping("/{id}")
     public Optional<User> getUser(@PathVariable Long id) {
@@ -53,5 +47,5 @@ public class UserController {
     public User updateUser(@RequestBody User user) {
         return userService.createUser(user);
     }
-
+     */
 }
