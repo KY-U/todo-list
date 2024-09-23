@@ -7,6 +7,7 @@ import br.todo_list.service.TodoItemService;
 import br.todo_list.service.TodoListService;
 import br.todo_list.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.batch.BatchTransactionManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -136,5 +137,13 @@ public class WebController {
         model.addAttribute("listId", listId);
 
         return "create_item";
+    }
+
+    @PostMapping("/history")
+    public String getHistory(@RequestParam("listId") Long listId, Model model){
+        List<TodoItem> itemList = todoItemService.getTodoItemsByTodoListId(listId);
+        model.addAttribute("itemList", itemList);
+        model.addAttribute("listId", listId);
+        return "history";
     }
 }

@@ -10,7 +10,7 @@
 
 
 <div class="container">
-    <!-- Botão para voltar para a home -->
+    <!-- Botão para criar lista -->
     <div class="navigation-buttons">
         <a href="#" th:href="@{/home}" class="button create-button">Back to Home</a>
         <!-- Botão para criar um novo item -->
@@ -30,11 +30,14 @@
         <form th:action="@{/edit_list/{id}(id=${listId})}" method = "get">
             <button type="submit" class="button delete-button">Edit List</button>
         </form>
+
+        <form th:action="@{/history}" method="post">
+            <input type="hidden" name="listId" th:value="${listId}" />
+            <button type="submit" class="button history-button">View History</button>
+        </form>
+
     </div>
 
-    <div class="delete-list-button">
-        <form th:action="@{/edit_list/{id}(id=${listId})}" class="button edit-button">Edit List</form>
-    </div>
 
     <ul>
         <li th:each="todoItem : ${itemList}" th:if="${!todoItem.completed}">
