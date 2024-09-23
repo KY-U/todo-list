@@ -31,4 +31,12 @@ public class TodoItemService {
     public void deleteTodoItem(Long id) {
         todoItemRepository.deleteById(id);
     }
+
+    public List<TodoItem> getCompletedItemsByListId(Long listId) {
+        return todoItemRepository.findByTodoListIdAndCompletedTrue(listId);
+    }
+
+    public List<TodoItem> getIncompleteItemsByListId(Long listId) {
+        return todoItemRepository.findByTodoListIdAndCompletedFalse(listId);
+    }
 }

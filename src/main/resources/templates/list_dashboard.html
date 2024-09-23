@@ -40,6 +40,7 @@
 
 
     <ul>
+        <!-- Lista cada botão. A verificação de completed é redundante. -->
         <li th:each="todoItem : ${itemList}" th:if="${!todoItem.completed}">
             <div class="todo-item">
                 <h2 th:text="${todoItem.title}" class="todo-title">Item Title</h2>

@@ -59,7 +59,7 @@ public class WebController {
     @GetMapping("/list_dashboard/{id}")
     public String listDashboard(@PathVariable("id") Long listId, Model model){
         //System.out.println("Received listId: " + listId);
-        List<TodoItem> itemList = todoItemService.getTodoItemsByTodoListId(listId);
+        List<TodoItem> itemList = todoItemService.getIncompleteItemsByListId(listId);
         String listTitle = todoListService.getListTitle(listId);
         String description = todoListService.getListDescription(listId);
 
@@ -141,7 +141,7 @@ public class WebController {
 
     @PostMapping("/history")
     public String getHistory(@RequestParam("listId") Long listId, Model model){
-        List<TodoItem> itemList = todoItemService.getTodoItemsByTodoListId(listId);
+        List<TodoItem> itemList = todoItemService.getCompletedItemsByListId(listId);
         model.addAttribute("itemList", itemList);
         model.addAttribute("listId", listId);
         return "history";

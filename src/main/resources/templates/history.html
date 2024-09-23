@@ -11,7 +11,7 @@
 <div class="container">
   <h1>Completed Todo Items</h1>
 
-  <!-- Lista dos itens completados -->
+  <!-- Lista dos itens completados. A verificação de completed é redundante -->
   <ul>
     <li th:each="todoItem : ${itemList}" th:if="${todoItem.completed}">
       <div class="todo-item">
