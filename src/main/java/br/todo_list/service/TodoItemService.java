@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import br.todo_list.model.TodoItem;
 import br.todo_list.repository.TodoItemRepository;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -23,15 +22,6 @@ public class TodoItemService {
         return todoItemRepository.findById(id);
     }
 
-    @Transactional
-    public List<TodoItem> getTodoItemsByTodoListId(Long todoListId) {
-        return todoItemRepository.findByTodoListId(todoListId);
-    }
-
-    //public void deleteTodoItem(Long id) {
-    //    todoItemRepository.deleteById(id);
-    //}
-
     public List<TodoItem> getCompletedItemsByListId(Long listId) {
         return todoItemRepository.findByTodoListIdAndCompletedTrue(listId);
     }
@@ -45,5 +35,4 @@ public class TodoItemService {
         item.get().setCompleted(true);
         return todoItemRepository.save(item.get());
     }
-
 }

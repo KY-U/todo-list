@@ -8,8 +8,6 @@ public interface TodoItemRepository extends JpaRepository<TodoItem, Long> {
     //encontrar os items de uma lista
     List<TodoItem> findByTodoListId(Long todoListId);
 
-    //List<TodoItem> findByTitle(String title);
-
     //encontrar os items completos de uma lista
     List<TodoItem> findByTodoListIdAndCompletedTrue(Long todoListId);
 
