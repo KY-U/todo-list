@@ -28,7 +28,7 @@ public class User {
     @Column(nullable = false, unique = true, length = 100)
     private String email;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<TodoList> todoLists;
 
     @NotEmpty

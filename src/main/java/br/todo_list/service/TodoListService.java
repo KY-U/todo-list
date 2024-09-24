@@ -41,6 +41,13 @@ public class TodoListService {
         return list.get().getDescription();
     }
 
+    public void deleteTodoList(Long id){
+        todoListRepository.deleteById(id);
+    }
+
+    /* Não é necessário deletar os items individualmente devido à
+    configuração de cascade
+
     public void deleteTodoListAndItems(long listId){
         List<TodoItem> items = todoItemRepository.findByTodoListId(listId);
         for(TodoItem item: items){
@@ -48,6 +55,7 @@ public class TodoListService {
         }
         todoListRepository.deleteById(listId);
     }
+     */
 
     /*
     public String getListOwnerName(Long id) {
