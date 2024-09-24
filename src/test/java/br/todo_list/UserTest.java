@@ -48,7 +48,7 @@ public class UserTest {
     @Test
     public void testInvalidUserCreation() {
         User user = new User();
-        user.setUsername("");
+        user.setUsername("Roboute Guilliman");
         user.setPassword("password123");
         user.setEmail("invalid-email");//falta o @
         user.setRole("USER");

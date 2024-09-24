@@ -1,6 +1,7 @@
 package br.todo_list.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 @Data
@@ -11,6 +12,7 @@ public class TodoItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "Title cannot be blank")
     @Column(nullable = false, length = 100)
     private String title;
 
