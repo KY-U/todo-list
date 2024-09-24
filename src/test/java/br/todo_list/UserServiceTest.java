@@ -13,7 +13,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class UserServiceTest {
@@ -51,6 +51,10 @@ public class UserServiceTest {
         // validação
         assertEquals(user.getEmail(), createdUser.getEmail());
         assertEquals(encodedPassword, createdUser.getPassword());
+
+        // verificações adicionais
+        verify(passwordEncoder, times(1)).encode(anyString());
+        verify(userRepository, times(1)).save(user);
     }
 
     @Test
@@ -63,5 +67,8 @@ public class UserServiceTest {
 
         // validação
         assertEquals(user, foundUser);
+
+        // verificações adicionais
+        verify(userRepository, times(1)).findByEmail("test@example.com");
     }
 }
