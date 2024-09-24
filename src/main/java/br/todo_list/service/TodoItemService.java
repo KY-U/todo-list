@@ -28,9 +28,9 @@ public class TodoItemService {
         return todoItemRepository.findByTodoListId(todoListId);
     }
 
-    public void deleteTodoItem(Long id) {
-        todoItemRepository.deleteById(id);
-    }
+    //public void deleteTodoItem(Long id) {
+    //    todoItemRepository.deleteById(id);
+    //}
 
     public List<TodoItem> getCompletedItemsByListId(Long listId) {
         return todoItemRepository.findByTodoListIdAndCompletedTrue(listId);
@@ -45,4 +45,5 @@ public class TodoItemService {
         item.get().setCompleted(true);
         return todoItemRepository.save(item.get());
     }
+
 }
