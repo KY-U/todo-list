@@ -28,7 +28,7 @@
         </form>
 
         <!-- Botão para editar a lista -->
-        <form th:action="@{/edit_list}" method = "post">
+        <form th:action="@{/edit_list}" method = "get">
             <!-- Campo oculto para enviar o ID sem expor na URL -->
             <input type="hidden" name="id" th:value="${listId}" />
             <button type="submit" class="button delete-button">Edit List</button>

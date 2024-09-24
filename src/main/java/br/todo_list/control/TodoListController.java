@@ -33,7 +33,7 @@ public class TodoListController {
         User user = userService.getUserByEmail(principal.getName());
         todoList.setUser(user);
         todoListService.createTodoList(todoList);
-        return "create_list";
+        return "redirect:/home";
     }
 
     //editar lista
@@ -44,7 +44,7 @@ public class TodoListController {
         todoListService.createTodoList(todoList);
 
         Long listId = todoList.getId();
-        return "redirect:/edit_list/" + listId;
+        return "redirect:/edit_list?id=" + listId;
     }
 
     @PostMapping("/delete")

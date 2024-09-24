@@ -88,7 +88,7 @@ public class WebController {
     }
 
     //página de editar list
-    @PostMapping("/edit_list")
+    @GetMapping("/edit_list")
     public String editList(@RequestParam("id") Long listId, Model model){
         Optional<TodoList> list = todoListService.getTodoList(listId);
         if (list == null) {
