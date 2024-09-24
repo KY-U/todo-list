@@ -23,29 +23,4 @@ public class UserController {
         return "redirect:/login";
     }
 
-    /*
-    //get user
-    @GetMapping("/{id}")
-    public Optional<User> getUser(@PathVariable Long id) {
-        return userService.getUser(id);
-    }
-
-    //list
-    @GetMapping
-    public List<User> getAllUsers() {
-        return userService.getAllUsers();
-    }
-
-    //delete
-    @DeleteMapping("/{id}")
-    public void deleteUser(@PathVariable Long id) {
-        userService.deleteUser(id);
-    }
-
-    //update
-    @PutMapping("/{id}")
-    public User updateUser(@RequestBody User user) {
-        return userService.createUser(user);
-    }
-     */
 }

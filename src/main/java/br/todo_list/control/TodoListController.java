@@ -61,34 +61,4 @@ public class TodoListController {
         return "redirect:/home";
     }
 
-    /*
-    //get todo list
-    @GetMapping("/{id}")
-    public String getTodoList(@PathVariable Long id, Model model) {
-        //recupera lista de items
-        List<TodoItem> itemsList = todoItemService.getTodoItemsByTodoListId(id);
-        model.addAttribute("todoItems", itemsList);
-
-        return "todo_list";
-    }
-
-    //get todo lists by user id
-    @GetMapping("/users/{userId}")
-    public List<TodoList> getTodoListsByUserId(@PathVariable Long userId) {
-        return todoListService.getTodoListsByUserId(userId);
-    }
-
-    //delete
-    @DeleteMapping("/{id}")
-    public void deleteTodoList(@PathVariable Long id) {
-        todoListService.deleteTodoList(id);
-    }
-
-    //update
-    @PutMapping("/{id}")
-    public TodoList updateTodoList(@RequestBody TodoList todoList) {
-        return todoListService.createTodoList(todoList);
-    }
-
-     */
 }

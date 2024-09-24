@@ -59,8 +59,6 @@ public class WebController {
         return "home";
     }
 
-
-
     //página de lista específica
     @GetMapping("/list_dashboard")
     public String listDashboard(@RequestParam("id") Long listId, Model model){
@@ -89,16 +87,7 @@ public class WebController {
         return "create_list";
     }
 
-
-
-    //página de criar item
-    @GetMapping("/create_item")
-    public String createItem(@RequestParam("listId") Long listId, Model model){
-        model.addAttribute("listId", listId);
-        return "create_item";
-    }
-
-
+    //página de editar list
     @PostMapping("/edit_list")
     public String editList(@RequestParam("id") Long listId, Model model){
         Optional<TodoList> list = todoListService.getTodoList(listId);
@@ -109,6 +98,13 @@ public class WebController {
         model.addAttribute("list", list.get());
 
         return "create_list";
+    }
+
+    //página de criar item
+    @GetMapping("/create_item")
+    public String createItem(@RequestParam("listId") Long listId, Model model){
+        model.addAttribute("listId", listId);
+        return "create_item";
     }
 
     //página de editar item

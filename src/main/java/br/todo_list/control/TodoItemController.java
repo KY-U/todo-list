@@ -83,29 +83,5 @@ public class TodoItemController {
         return "redirect:/list_dashboard?id=" + listId;
     }
 
-    /*
-    //get todo item
-    @GetMapping("/{id}")
-    public Optional<TodoItem> getTodoItem(@PathVariable Long id) {
-        return todoItemService.getTodoItem(id);
-    }
 
-    //get todo items by to do list
-    @GetMapping("/lists/{todoListId}")
-    public List<TodoItem> getTodoItemsByTodoListId(@PathVariable Long todoListId) {
-        return todoItemService.getTodoItemsByTodoListId(todoListId);
-    }
-
-    // delete item
-    @DeleteMapping("/{id}")
-    public void deleteTodoItem(@PathVariable Long id) {
-        todoItemService.deleteTodoItem(id);
-    }
-
-    //update
-    @PostMapping("/{id}")
-    public TodoItem updateTodoItem(@RequestBody TodoItem todoItem) {
-        return todoItemService.createTodoItem(todoItem);
-    }
-     */
 }
