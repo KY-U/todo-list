@@ -38,8 +38,8 @@ public class TodoListApplication {
 
 			String rawPassword = "123";
 			String encryptedPassword = passwordEncoder.encode(rawPassword);
-			System.out.println("Senha antes:" + rawPassword);
-			System.out.println("Senha depois:" + encryptedPassword);
+			//System.out.println("Senha antes:" + rawPassword);
+			//System.out.println("Senha depois:" + encryptedPassword);
 			user1.setPassword(encryptedPassword);
 
 			//user1.setPassword(passwordEncoder.encode("123"));
