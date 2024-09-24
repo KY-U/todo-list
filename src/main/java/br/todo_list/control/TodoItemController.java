@@ -30,42 +30,15 @@ public class TodoItemController {
     }
 
     @PostMapping("/edit")
-    public String editTodoItem(
-            @RequestParam("listId") Long listId,
-            @RequestParam("title") String title,
-            @RequestParam(value = "description", required = false) String description,
-            @RequestParam("id") Long itemId,
-            Model model) {
-
-        //todoItem
-        Optional<TodoItem> item = todoItemService.getTodoItem(itemId);
-
-        item.get().setTitle(title);
-        item.get().setDescription(description);
-        item.get().setCompleted(false);
-        item.get().setTodoList(todoListService.getTodoList(listId).get());
-
-        todoItemService.createTodoItem(item.get());
-
-        model.addAttribute("listId", listId);
-        model.addAttribute("id", itemId);
-
-        return "redirect:/edit_item?id=" + itemId + "&listId=" + listId;
+    public String editTodoItem(@RequestParam("listId") Long listId, @ModelAttribute TodoItem item) {
+        item.setTodoList(todoListService.getTodoList(listId).orElse(null));
+        todoItemService.createTodoItem(item);
+        return "redirect:/edit_item?id=" + item.getId() + "&listId=" + listId;
     }
 
     @GetMapping("/complete")
-    public String completeItem(@RequestParam("id") Long itemId, @RequestParam("listId") Long listId, Model model){
-        //recuperando o item
-        Optional<TodoItem> item = todoItemService.getTodoItem(itemId);
-
-        //marcando como completado
-        item.get().setCompleted(true);
-
-        //função "save" do repositório cria e edita
-        todoItemService.createTodoItem(item.get());
-
-        //model.addAttribute("id", listId);
-
+    public String completeItem(@RequestParam("id") Long itemId, @RequestParam("listId") Long listId) {
+        todoItemService.completeTodoItem(itemId);
         return "redirect:/list_dashboard?id=" + listId;
     }
 

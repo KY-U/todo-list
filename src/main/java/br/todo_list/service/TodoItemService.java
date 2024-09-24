@@ -39,4 +39,10 @@ public class TodoItemService {
     public List<TodoItem> getIncompleteItemsByListId(Long listId) {
         return todoItemRepository.findByTodoListIdAndCompletedFalse(listId);
     }
+
+    public TodoItem completeTodoItem(Long itemId){
+        Optional<TodoItem> item = todoItemRepository.findById(itemId);
+        item.get().setCompleted(true);
+        return todoItemRepository.save(item.get());
+    }
 }
