@@ -1,6 +1,7 @@
 package br.todo_list.service.implementation;
 
 
+import br.todo_list.service.interfaces.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -8,7 +9,7 @@ import br.todo_list.model.User;
 import br.todo_list.repository.UserRepository;
 
 @Service
-public class UserService implements br.todo_list.service.interfaces.IUserService {
+public class UserService implements IUserService {
 
     @Autowired
     private UserRepository userRepository;

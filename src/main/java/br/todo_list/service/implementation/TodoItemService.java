@@ -1,15 +1,15 @@
 package br.todo_list.service.implementation;
 
+import br.todo_list.service.interfaces.ITodoItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import br.todo_list.model.TodoItem;
 import br.todo_list.repository.TodoItemRepository;
-
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class TodoItemService implements br.todo_list.service.interfaces.ITodoItemService {
+public class TodoItemService implements ITodoItemService {
 
     @Autowired
     private TodoItemRepository todoItemRepository;
