@@ -1,6 +1,5 @@
-package br.todo_list.service;
+package br.todo_list.service.implementation;
 
-import br.todo_list.model.TodoItem;
 import br.todo_list.repository.TodoItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class TodoListService {
+public class TodoListService implements br.todo_list.service.interfaces.ITodoListService {
 
     @Autowired
     private TodoListRepository todoListRepository;
@@ -19,28 +18,34 @@ public class TodoListService {
     @Autowired
     private TodoItemRepository todoItemRepository;
 
+    @Override
     public TodoList createTodoList(TodoList todoList) {
         return todoListRepository.save(todoList);
     }
 
+    @Override
     public Optional<TodoList> getTodoList(Long id) {
         return todoListRepository.findById(id);
     }
 
+    @Override
     public List<TodoList> getTodoListsByUserId(Long userId) {
         return todoListRepository.findByUserId(userId);
     }
 
+    @Override
     public String getListTitle(Long id){
         Optional<TodoList> list = todoListRepository.findById(id);
         return list.get().getTitle();
     }
 
+    @Override
     public String getListDescription(Long id){
         Optional<TodoList> list = todoListRepository.findById(id);
         return list.get().getDescription();
     }
 
+    @Override
     public void deleteTodoList(Long id){
         todoListRepository.deleteById(id);
     }

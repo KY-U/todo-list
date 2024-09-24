@@ -1,33 +1,26 @@
 package br.todo_list.control;
 
-import br.todo_list.model.TodoItem;
-import br.todo_list.model.TodoList;
 import br.todo_list.model.User;
-import br.todo_list.service.TodoItemService;
-import br.todo_list.service.TodoListService;
-import br.todo_list.service.UserService;
+import br.todo_list.service.interfaces.ITodoItemService;
+import br.todo_list.service.interfaces.ITodoListService;
+import br.todo_list.service.interfaces.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.batch.BatchTransactionManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
-import java.util.List;
-import java.util.Optional;
-
 @Controller
 public class WebController {
 
     @Autowired
-    private UserService userService;
+    private IUserService IUserService;
 
     @Autowired
-    private TodoListService todoListService;
+    private ITodoListService ITodoListService;
 
     @Autowired
-    private TodoItemService todoItemService;
+    private ITodoItemService ITodoItemService;
 
     //página de login
     @GetMapping("/login")
@@ -46,11 +39,11 @@ public class WebController {
     @GetMapping("/home")
     public String home(Authentication authentication, Model model) {
         //recuperando o usuário
-        User user = userService.getUserByEmail(authentication.getName());
+        User user = IUserService.getUserByEmail(authentication.getName());
 
         //adicionando o usuário e suas listas à página home
         model.addAttribute("user", user);
-        model.addAttribute("todoLists", todoListService.getTodoListsByUserId(user.getId()));
+        model.addAttribute("todoLists", ITodoListService.getTodoListsByUserId(user.getId()));
 
         return "home";
     }
@@ -58,9 +51,9 @@ public class WebController {
     //página de lista específica
     @GetMapping("/list_dashboard")
     public String listDashboard(@RequestParam("id") Long listId, Model model){
-        model.addAttribute("itemList", todoItemService.getIncompleteItemsByListId(listId));
-        model.addAttribute("title", todoListService.getListTitle(listId));
-        model.addAttribute("description", todoListService.getListDescription(listId));
+        model.addAttribute("itemList", ITodoItemService.getIncompleteItemsByListId(listId));
+        model.addAttribute("title", ITodoListService.getListTitle(listId));
+        model.addAttribute("description", ITodoListService.getListDescription(listId));
         model.addAttribute("listId", listId);
 
         return "list_dashboard";
@@ -75,7 +68,7 @@ public class WebController {
     //página de editar list
     @GetMapping("/edit_list")
     public String editList(@RequestParam("id") Long listId, Model model){
-        model.addAttribute("list", todoListService.getTodoList(listId).get());
+        model.addAttribute("list", ITodoListService.getTodoList(listId).get());
 
         return "create_list";
     }
@@ -90,7 +83,7 @@ public class WebController {
     //página de editar item
     @GetMapping("/edit_item")
     public String editItem(@RequestParam("id") Long itemId, @RequestParam("listId") Long listId, Model model){
-        model.addAttribute("item", todoItemService.getTodoItem(itemId).get());
+        model.addAttribute("item", ITodoItemService.getTodoItem(itemId).get());
         model.addAttribute("listId", listId);
 
         return "create_item";
@@ -99,7 +92,7 @@ public class WebController {
     //página de histórico de items da lista
     @PostMapping("/history")
     public String getHistory(@RequestParam("listId") Long listId, Model model){
-        model.addAttribute("itemList", todoItemService.getCompletedItemsByListId(listId));
+        model.addAttribute("itemList", ITodoItemService.getCompletedItemsByListId(listId));
         model.addAttribute("listId", listId);
 
         return "history";

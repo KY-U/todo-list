@@ -2,7 +2,7 @@ package br.todo_list;
 
 import br.todo_list.model.TodoItem;
 import br.todo_list.repository.TodoItemRepository;
-import br.todo_list.service.TodoItemService;
+import br.todo_list.service.interfaces.ITodoItemService;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -20,7 +20,7 @@ class TodoItemServiceTest {
 	private TodoItemRepository todoItemRepository;
 
 	@InjectMocks
-	private TodoItemService todoItemService;
+	private ITodoItemService ITodoItemService;
 
 	public TodoItemServiceTest() {
 		MockitoAnnotations.openMocks(this);
@@ -35,7 +35,7 @@ class TodoItemServiceTest {
 
 		when(todoItemRepository.save(todoItem)).thenReturn(todoItem);
 
-		TodoItem savedTodoItem = todoItemService.createTodoItem(todoItem);
+		TodoItem savedTodoItem = ITodoItemService.createTodoItem(todoItem);
 
 		assertNotNull(savedTodoItem);
 		assertEquals("Test Title", savedTodoItem.getTitle());

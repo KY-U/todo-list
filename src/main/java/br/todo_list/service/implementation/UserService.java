@@ -1,15 +1,14 @@
-package br.todo_list.service;
+package br.todo_list.service.implementation;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import br.todo_list.model.User;
 import br.todo_list.repository.UserRepository;
 
 @Service
-public class UserService {
+public class UserService implements br.todo_list.service.interfaces.IUserService {
 
     @Autowired
     private UserRepository userRepository;
@@ -17,11 +16,13 @@ public class UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Override
     public User createUser(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
 
+    @Override
     public User getUserByEmail(String email){
         return userRepository.findByEmail(email);
     }
