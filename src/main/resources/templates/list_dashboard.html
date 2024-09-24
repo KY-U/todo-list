@@ -22,12 +22,15 @@
 
     <!-- Botão para deletar a lista -->
     <div class="delete-list-button">
-        <form th:action="@{/lists/{id}/delete(id=${listId})}" method="post">
+        <form th:action="@{/lists/delete}" method="post">
+            <input type = "hidden" name="id" th:value="${listId}"/>
             <button type="submit" class="button delete-button" onclick="return confirm('Are you sure you want to delete this list?')">Delete List</button>
         </form>
 
         <!-- Botão para editar a lista -->
-        <form th:action="@{/edit_list/{id}(id=${listId})}" method = "get">
+        <form th:action="@{/edit_list}" method = "post">
+            <!-- Campo oculto para enviar o ID sem expor na URL -->
+            <input type="hidden" name="id" th:value="${listId}" />
             <button type="submit" class="button delete-button">Edit List</button>
         </form>
 
@@ -47,7 +50,8 @@
                 <p th:text="${todoItem.description}" class="todo-description">Item Description</p>
 
                 <!-- Botão para marcar como feito -->
-                <form th:action="@{/items/{id}/complete(id=${todoItem.id})}" method="post">
+                <form th:action="@{/items/complete}" method="get">
+                    <input type="hidden" name="id" th:value="${todoItem.id}" />
                     <input type="hidden" name="listId" th:value="${listId}" />
                     <button type="submit">Mark as Done</button>
                 </form>

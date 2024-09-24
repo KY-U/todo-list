@@ -35,7 +35,8 @@ layout:decorate="~{fragments/layout}">
     <ul>
         <!-- Iterando sobre a lista de TodoLists do usuário -->
         <li th:each="todoList : ${todoLists}">
-            <form th:action="@{/list_dashboard/{id}(id=${todoList.id})}" method="get">
+            <form th:action="@{/list_dashboard}" method="get">
+                <input type="hidden" name="id" th:value="${todoList.id}" />
                 <!-- O botão contém o título e descrição da lista -->
                 <button type="submit">
                     <h2 th:text="${todoList.title}">Todo List Title</h2>

@@ -29,6 +29,20 @@ public class WebController {
     @Autowired
     private TodoItemService todoItemService;
 
+    //página de login
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
+
+    //página de registrar novo usuário
+    @GetMapping("/register")
+    public String register(Model model){
+        model.addAttribute("user", new User());
+        return "register";
+    }
+
+    //página principal "home"
     @GetMapping("/home")
     public String home(Authentication authentication, Model model) {
         //email do usuário logado
@@ -45,19 +59,11 @@ public class WebController {
         return "home";
     }
 
-    @GetMapping("/login")
-    public String login() {
-        return "login";
-    }
 
-    @GetMapping("/register")
-    public String register(Model model){
-        model.addAttribute("user", new User());
-        return "register";
-    }
 
-    @GetMapping("/list_dashboard/{id}")
-    public String listDashboard(@PathVariable("id") Long listId, Model model){
+    //página de lista específica
+    @GetMapping("/list_dashboard")
+    public String listDashboard(@RequestParam("id") Long listId, Model model){
         //System.out.println("Received listId: " + listId);
         List<TodoItem> itemList = todoItemService.getIncompleteItemsByListId(listId);
         String listTitle = todoListService.getListTitle(listId);
@@ -77,48 +83,24 @@ public class WebController {
         return "list_dashboard";
     }
 
+    //página de criar lista
     @GetMapping("/create_list")
     public String createList(){
         return "create_list";
     }
 
-    @PostMapping("/items/{id}/complete")
-    public String completeItem(@PathVariable("id") Long itemId, @RequestParam("listId") Long listId){
-        //recuperando o item
-        Optional<TodoItem> item = todoItemService.getTodoItem(itemId);
 
-        //recuperando a lista ao qual pertence
-        TodoList List = item.get().getTodoList();
 
-        item.get().setCompleted(true);
-        //função "save" do repositório cria e edita
-        todoItemService.createTodoItem(item.get());
-
-        return "redirect:/list_dashboard/" + listId;
-    }
-
+    //página de criar item
     @GetMapping("/create_item")
     public String createItem(@RequestParam("listId") Long listId, Model model){
         model.addAttribute("listId", listId);
         return "create_item";
     }
 
-    @PostMapping("/lists/{id}/delete")
-    public String deleteList(@PathVariable("id") Long listId){
-        //deleta todos os items da lista
-        List<TodoItem> items = todoItemService.getTodoItemsByTodoListId(listId);
-        for(TodoItem item : items){
-            todoItemService.deleteTodoItem(item.getId());
-        }
 
-        //deleta a lista
-        todoListService.deleteTodoList(listId);
-
-        return "redirect:/home";
-    }
-
-    @GetMapping("/edit_list/{id}")
-    public String editList(@PathVariable("id") Long listId, Model model){
+    @PostMapping("/edit_list")
+    public String editList(@RequestParam("id") Long listId, Model model){
         Optional<TodoList> list = todoListService.getTodoList(listId);
         if (list == null) {
             return "redirect:/home";
@@ -129,6 +111,7 @@ public class WebController {
         return "create_list";
     }
 
+    //página de editar item
     @GetMapping("/edit_item")
     public String editItem(@RequestParam("id") Long itemId, @RequestParam("listId") Long listId, Model model){
         Optional<TodoItem> item = todoItemService.getTodoItem(itemId);
@@ -139,6 +122,7 @@ public class WebController {
         return "create_item";
     }
 
+    //página de histórico de items da lista
     @PostMapping("/history")
     public String getHistory(@RequestParam("listId") Long listId, Model model){
         List<TodoItem> itemList = todoItemService.getCompletedItemsByListId(listId);

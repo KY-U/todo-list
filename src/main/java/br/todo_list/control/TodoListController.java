@@ -25,6 +25,8 @@ public class TodoListController {
     @Autowired
     private TodoListService todoListService;
 
+    @Autowired
+    private TodoItemService todoItemService;
     //criar lista
     @PostMapping("/create")
     public String createTodoList(@ModelAttribute TodoList todoList, Principal principal) {
@@ -43,6 +45,20 @@ public class TodoListController {
 
         Long listId = todoList.getId();
         return "redirect:/edit_list/" + listId;
+    }
+
+    @PostMapping("/delete")
+    public String deleteList(@RequestParam("id") Long listId){
+        //deleta todos os items da lista
+        List<TodoItem> items = todoItemService.getTodoItemsByTodoListId(listId);
+        for(TodoItem item : items){
+            todoItemService.deleteTodoItem(item.getId());
+        }
+
+        //deleta a lista
+        todoListService.deleteTodoList(listId);
+
+        return "redirect:/home";
     }
 
     /*

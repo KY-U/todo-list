@@ -1,5 +1,6 @@
 package br.todo_list.control;
 
+import br.todo_list.model.TodoList;
 import br.todo_list.service.TodoListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -64,6 +65,22 @@ public class TodoItemController {
         model.addAttribute("id", itemId);
 
         return "redirect:/edit_item?id=" + itemId + "&listId=" + listId;
+    }
+
+    @GetMapping("/complete")
+    public String completeItem(@RequestParam("id") Long itemId, @RequestParam("listId") Long listId, Model model){
+        //recuperando o item
+        Optional<TodoItem> item = todoItemService.getTodoItem(itemId);
+
+        //marcando como completado
+        item.get().setCompleted(true);
+
+        //função "save" do repositório cria e edita
+        todoItemService.createTodoItem(item.get());
+
+        //model.addAttribute("id", listId);
+
+        return "redirect:/list_dashboard?id=" + listId;
     }
 
     /*

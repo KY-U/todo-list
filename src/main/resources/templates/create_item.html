@@ -36,7 +36,10 @@
 
     <!-- Botão para voltar -->
     <div class="button">
-        <a href="#" th:href="@{/list_dashboard/{id}(id=${listId})}" class="button create-button">Back to List</a>
+        <form th:action="@{/list_dashboard}" method="get">
+            <input type="hidden" name="id" th:value="${listId}" />
+            <button type="submit" class="button create-button">Back to List</button>
+        </form>
     </div>
 </div>
 </body>

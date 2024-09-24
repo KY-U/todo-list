@@ -41,7 +41,7 @@ public class TodoListApplication {
 			System.out.println("Senha antes:" + rawPassword);
 			System.out.println("Senha depois:" + encryptedPassword);
 			user1.setPassword(encryptedPassword);
-			
+
 			//user1.setPassword(passwordEncoder.encode("123"));
 			user1.setEmail("user1@example.com");
 			user1.setRole("USER");
