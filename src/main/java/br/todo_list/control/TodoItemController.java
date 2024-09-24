@@ -23,24 +23,10 @@ public class TodoItemController {
     private TodoListService todoListService;
     //create
     @PostMapping("/create")
-    public String createTodoItem(
-            @RequestParam("listId") Long listId,
-            @RequestParam("title") String title,
-            @RequestParam(value = "description", required = false) String description,
-            Model model) {
-
-        //criando o todoItem
-        TodoItem item = new TodoItem();
-        item.setTitle(title);
-        item.setDescription(description);
-        item.setCompleted(false);
-        item.setTodoList(todoListService.getTodoList(listId).get());
-
+    public String createTodoItem(@RequestParam("listId") Long listId, @ModelAttribute TodoItem item) {
+        item.setTodoList(todoListService.getTodoList(listId).orElse(null));
         todoItemService.createTodoItem(item);
-
-        model.addAttribute("listId", listId);
-
-        return "create_item";
+        return "redirect:/list_dashboard?id=" + listId;
     }
 
     @PostMapping("/edit")
@@ -82,6 +68,5 @@ public class TodoItemController {
 
         return "redirect:/list_dashboard?id=" + listId;
     }
-
 
 }

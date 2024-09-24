@@ -6,9 +6,6 @@ import org.springframework.web.bind.annotation.*;
 import br.todo_list.model.User;
 import br.todo_list.service.UserService;
 
-import java.util.List;
-import java.util.Optional;
-
 @Controller
 @RequestMapping("/users")
 public class UserController {
