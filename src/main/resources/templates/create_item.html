@@ -7,7 +7,8 @@
     <link href="/css/verde.css" rel="stylesheet">
 </head>
 <body>
-<div class="container">
+
+<div class="create-list-container">
     <h1 th:text="${item != null} ? 'Edit ' + ${item.title} : 'Create a New Todo Item'"></h1>
 
     <!-- Formulário para criar ou editar um item -->
@@ -29,13 +30,13 @@
         </div>
 
         <!-- Botão de envio -->
-        <div class="form-group">
-            <button type="submit" th:text="${item != null} ? 'Save Changes' : 'Create Item'"></button>
-        </div>
+
+        <button type="submit" th:text="${item != null} ? 'Save Changes' : 'Create Item'"></button>
+
     </form>
 
     <!-- Botão para voltar -->
-    <div class="button">
+    <div >
         <form th:action="@{/list_dashboard}" method="get">
             <input type="hidden" name="id" th:value="${listId}" />
             <button type="submit" class="button create-button">Back to List</button>

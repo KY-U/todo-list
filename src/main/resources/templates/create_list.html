@@ -12,22 +12,29 @@
     <h1 th:text="${list != null ? 'Edit ' + list.title : 'Create New Todo List'}"></h1>
 
     <form th:action="${list != null} ? @{/lists/edit} : @{/lists/create}" method="post">
+        <!-- Campo oculto para enviar o listId -->
         <input type="hidden" name="id" th:value="${list != null} ? ${list.id} : null" />
+
+        <!-- Campo para o título do item -->
         <div class="form-group">
             <label for="title">Title:</label>
             <input type="text" id="title" name="title" th:value="${list != null} ? ${list.title} : ''" required>
         </div>
+
         <div class="form-group">
             <label for="description">Description:</label>
             <textarea id="description" name="description" rows="4" th:text="${list != null} ? ${list.description} : ''"></textarea>
         </div>
+
         <button type="submit" th:text="${list != null} ? 'Save Changes' : 'Save List'"></button>
     </form>
 
-    <form th:action="${list != null} ? @{/list_dashboard} : @{/home}" th:method="get">
-        <input type="hidden" name="id" th:value="${list.id}" th:if="${list != null}" />
-        <button type="submit" class="button create-button" th:text="${list != null} ? 'Back to List' : 'Back to Home'"></button>
-    </form>
+    <div>
+        <form th:action="${list != null} ? @{/list_dashboard} : @{/home}" th:method="get">
+            <input type="hidden" name="id" th:value="${list.id}" th:if="${list != null}" />
+            <button type="submit" class="button create-button" th:text="${list != null} ? 'Back to List' : 'Back to Home'"></button>
+        </form>
+    </div>
 
 </div>
 
