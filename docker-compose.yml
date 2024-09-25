@@ -3,8 +3,6 @@ version: '3.8'
 services:
   app:
     build: .
-    ports:
-      - "8080:8080"
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/postgres
       SPRING_DATASOURCE_USERNAME: postgres
@@ -19,8 +17,6 @@ services:
       POSTGRES_DB: postgres
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: root
-    ports:
-      - "5433:5432"
     healthcheck:
       test: [ "CMD-SHELL", "pg_isready -U postgres" ]
       interval: 30s
@@ -29,5 +25,14 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
 
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    ports:
+      - "80:80"  # Expondo apenas a porta 80 para o mundo externo
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - app
 volumes:
   pgdata:
