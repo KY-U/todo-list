@@ -22,6 +22,12 @@ public class WebController {
     @Autowired
     private ITodoItemService ITodoItemService;
 
+    //root
+    @GetMapping("/")
+    public String goHome(){
+        return "redirect:/home";
+    }
+
     //página de login
     @GetMapping("/login")
     public String login() {

@@ -38,7 +38,7 @@ layout:decorate="~{fragments/layout}">
             <form th:action="@{/list_dashboard}" method="get">
                 <input type="hidden" name="id" th:value="${todoList.id}" />
                 <!-- O botão contém o título e descrição da lista -->
-                <button type="submit">
+                <button type="submit" class = "button">
                     <h2 th:text="${todoList.title}">Todo List Title</h2>
                     <p th:text="${todoList.description}">Todo List Description</p>
                 </button>

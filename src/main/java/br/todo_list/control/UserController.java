@@ -19,5 +19,4 @@ public class UserController {
         IUserService.createUser(user);
         return "redirect:/login";
     }
-
 }

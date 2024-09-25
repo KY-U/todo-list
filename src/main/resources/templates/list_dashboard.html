@@ -53,14 +53,14 @@
                 <form th:action="@{/items/complete}" method="get">
                     <input type="hidden" name="id" th:value="${todoItem.id}" />
                     <input type="hidden" name="listId" th:value="${listId}" />
-                    <button type="submit">Mark as Done</button>
+                    <button type="submit" class="buttom">Mark as Done</button>
                 </form>
 
                 <!-- Botão para editar o item -->
                 <form th:action="@{/edit_item}" method="get">
                     <input type="hidden" name="id" th:value="${todoItem.id}" />
                     <input type="hidden" name="listId" th:value="${listId}" />
-                    <button type="submit">Edit Item</button>
+                    <button type="submit" class="buttom">Edit Item</button>
                 </form>
             </div>
         </li>
