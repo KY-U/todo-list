@@ -24,12 +24,11 @@
         <button type="submit" th:text="${list != null} ? 'Save Changes' : 'Save List'"></button>
     </form>
 
-    <button>
-        <form th:action="${list != null} ? @{/list_dashboard} : @{/home}" th:method="get">
-            <input type="hidden" name="id" th:value="${list.id}" th:if="${list != null}" />
-            <button type="submit" class="button create-button" th:text="${list != null} ? 'Back to List' : 'Back to Home'"></button>
-        </form>
-    </button>
+    <form th:action="${list != null} ? @{/list_dashboard} : @{/home}" th:method="get">
+        <input type="hidden" name="id" th:value="${list.id}" th:if="${list != null}" />
+        <button type="submit" class="button create-button" th:text="${list != null} ? 'Back to List' : 'Back to Home'"></button>
+    </form>
+
 </div>
 
 </body>
