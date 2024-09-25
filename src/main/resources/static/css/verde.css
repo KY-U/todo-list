@@ -1,9 +1,3 @@
-/* src/main/resources/static/css/verde.css */
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
@@ -23,6 +17,7 @@ body {
     max-width: 100%;
     text-align: center;
 }
+
 input[type="text"],
 input[type="email"],
 input[type="password"] {
@@ -49,11 +44,6 @@ button:hover {
     background-color: #218838;
 }
 
-/* Para alinhar o botão de envio no centro */
-.form-group {
-    margin-top: 15px;
-}
-
 /* Estilo opcional para mensagens de erro */
 .error-message {
     color: red;
@@ -77,35 +67,6 @@ button:hover {
 .login-container label {
     display: block;
     margin-bottom: 8px;
-}
-
-.login-container input[type="text"],
-.login-container input[type="password"] {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
-    border-radius: 4px;
-    border: 1px solid #ddd;
-}
-
-.login-container button {
-    width: 100%;
-    padding: 10px;
-    background-color: #28a745;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.login-container button:hover {
-    background-color: #218838;
-}
-
-.login-container .error-message {
-    color: red;
-    text-align: center;
-    margin-top: 10px;
 }
 
 .home-container {
@@ -210,7 +171,6 @@ button:hover {
     background-color: #c82333; /* Cor vermelha escura para hover */
 }
 
-/*aaaaaaaaaaaaa/
 /* Container for the navigation buttons */
 .navigation-buttons {
     margin-bottom: 20px;
