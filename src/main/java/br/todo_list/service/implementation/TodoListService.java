@@ -1,5 +1,6 @@
 package br.todo_list.service.implementation;
 
+import br.todo_list.model.TodoItem;
 import br.todo_list.repository.TodoItemRepository;
 import br.todo_list.service.interfaces.ITodoListService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,9 +52,7 @@ public class TodoListService implements ITodoListService {
         todoListRepository.deleteById(id);
     }
 
-    /* Não é necessário deletar os items individualmente devido à
-    configuração de cascade
-
+    @Override
     public void deleteTodoListAndItems(long listId){
         List<TodoItem> items = todoItemRepository.findByTodoListId(listId);
         for(TodoItem item: items){
@@ -61,7 +60,7 @@ public class TodoListService implements ITodoListService {
         }
         todoListRepository.deleteById(listId);
     }
-     */
+
 
     /*
     public String getListOwnerName(Long id) {

@@ -37,8 +37,7 @@ public class TodoListController {
 
     @PostMapping("/delete")
     public String deleteList(@RequestParam("id") Long listId){
-        //todoListService.deleteTodoListAndItems(listId);
-        ITodoListService.deleteTodoList(listId);
+        ITodoListService.deleteTodoListAndItems(listId);
         return "redirect:/home";
     }
 

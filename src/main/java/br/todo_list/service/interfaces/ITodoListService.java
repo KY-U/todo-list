@@ -17,4 +17,6 @@ public interface ITodoListService {
     String getListDescription(Long id);
 
     void deleteTodoList(Long id);
+
+    void deleteTodoListAndItems(long listId);
 }

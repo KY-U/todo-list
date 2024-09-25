@@ -1,5 +1,6 @@
 package br.todo_list;
 
+import br.todo_list.model.TodoItem;
 import br.todo_list.model.TodoList;
 import br.todo_list.repository.TodoListRepository;
 import br.todo_list.repository.TodoItemRepository;
@@ -10,6 +11,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.util.Arrays;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -101,6 +103,26 @@ class TodoListServiceTest {
 
         todoListService.deleteTodoList(1L);
 
+        verify(todoListRepository, times(1)).deleteById(1L);
+    }
+
+    @Test
+    void testDeleteTodoListAndItems() {
+        // Mock para os itens de tarefa
+        TodoItem item1 = mock(TodoItem.class);
+        TodoItem item2 = mock(TodoItem.class);
+
+        // Mock para retornar os itens de tarefa ao buscar pelo ID da lista de tarefas
+        when(todoItemRepository.findByTodoListId(1L)).thenReturn(Arrays.asList(item1, item2));
+
+        // Chama o método que estamos testando
+        todoListService.deleteTodoListAndItems(1L);
+
+        // Verifica se os itens de tarefa foram deletados
+        verify(todoItemRepository, times(1)).delete(item1);
+        verify(todoItemRepository, times(1)).delete(item2);
+
+        // Verifica se a lista de tarefas foi deletada
         verify(todoListRepository, times(1)).deleteById(1L);
     }
 }
